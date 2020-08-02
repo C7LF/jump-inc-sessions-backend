@@ -3,7 +3,7 @@ const app = express()
 
 const puppeteer = require('puppeteer');
 
-app.get('/sessions', (req, res) => {
+app.get('/sessions', cors(), (req, res) => {
     const sessionData = async () => {
         const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
         const page = await browser.newPage();
