@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express()
-const port = 3001
 
 const puppeteer = require('puppeteer');
 
@@ -31,4 +30,4 @@ app.get('/sessions', (req, res) => {
     sessionData()
 })
 
-app.listen(port, () =>  console.log(`Server running on port ${port}`))
+app.listen(process.env.PORT || 8080, () =>  console.log(`Server running`))
