@@ -1,0 +1,16 @@
+{
+  "name": "jump-inc-sessions-extension Serverless Functions",
+  "version": "1.0.0",
+  "description": "",
+  "proxy": "http://localhost:3001/",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "puppeteer": "^5.2.1"
+  }
+}
