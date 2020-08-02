@@ -5,12 +5,12 @@ const puppeteer = require('puppeteer');
 
 app.get('/sessions', (req, res) => {
     const sessionData = async () => {
-        const browser = await puppeteer.launch();
+        const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
         const page = await browser.newPage();
-    
+
         page.on('response', async response => {
             // allow XHR only
-            if ('xhr' !== response.request().resourceType()){
+            if ('xhr' !== response.request().resourceType()) {
                 return ''
             }
 
@@ -22,7 +22,7 @@ app.get('/sessions', (req, res) => {
                 }).catch(err => console.log(err));
             }
         });
-    
+
         await page.goto('https://roller.app/jumpincsheffield/products/booknow?/sessions#/sessions', { waitUntil: ['networkidle2', 'load', 'domcontentloaded'], timeout: 100000 })
         await page.close()
         await browser.close()
@@ -30,4 +30,4 @@ app.get('/sessions', (req, res) => {
     sessionData()
 })
 
-app.listen(process.env.PORT || 8080, () =>  console.log(`Server running`))
+app.listen(process.env.PORT || 8080, () => console.log(`Server running`))
