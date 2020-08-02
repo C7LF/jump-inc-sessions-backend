@@ -1,7 +1,3 @@
-[dev]
-functions="functions/"
-
-
 [build]
-functions = "functions/"
-
+functions = "functions"
+publish="dist"
