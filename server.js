@@ -4,8 +4,8 @@ const app = express()
 
 const puppeteer = require('puppeteer');
 
-app.get('/sessions', cors(), (req, res) => {
-    const sessionData = async () => {
+app.get('/sessions', cors(), async (req, res, next) => {
+    try {
         const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
         const page = await browser.newPage();
 
@@ -27,8 +27,10 @@ app.get('/sessions', cors(), (req, res) => {
         await page.goto('https://roller.app/jumpincsheffield/products/booknow?/sessions#/sessions', { waitUntil: ['networkidle2', 'load', 'domcontentloaded'], timeout: 100000 })
         await page.close()
         await browser.close()
-    };
-    sessionData()
+        next()
+    } catch (error) {
+        next(error)
+    }
 })
 
 app.listen(process.env.PORT || 8080, () => console.log(`Server running`))
